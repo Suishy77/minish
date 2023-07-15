@@ -3,53 +3,96 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+         #
+#    By: aminko <aminko@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/12 15:23:51 by smessal           #+#    #+#              #
-#    Updated: 2023/01/06 16:26:04 by zel-kass         ###   ########.fr        #
+#    Created: 2023/05/12 23:14:10 by aminko            #+#    #+#              #
+#    Updated: 2023/07/15 20:23:39 by aminko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-					ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
-					ft_memcpy.c ft_memmove.c \
-					ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c \
-					ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
-					ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
-					ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
-					ft_putchar_fd.c ft_putstr_fd.c ft_strcmp.c \
-					ft_putendl_fd.c ft_putnbr_fd.c ft_striteri.c \
+NAME		=	libft.a
 
-OBJS			= $(SRCS:.c=.o)
+SRCS = ft_printf.c ft_printf_utils.c \
+ft_puthex.c \
+ft_atoll.c \
+ft_strcmp.c \
+ft_swap.c \
+ft_atoi.c \
+ft_bzero.c \
+ft_calloc.c \
+ft_isalnum.c \
+ft_isascii.c \
+ft_isalpha.c \
+ft_isdigit.c \
+ft_isprint.c \
+ft_itoa.c \
+ft_memchr.c \
+ft_memcmp.c \
+ft_memcpy.c \
+ft_memmove.c \
+ft_memset.c \
+ft_putchar_fd.c \
+ft_putstr_fd.c \
+ft_putendl_fd.c \
+ft_putnbr_fd.c \
+ft_split.c \
+ft_strchr.c \
+ft_strdup.c \
+ft_striteri.c \
+ft_strjoin.c \
+ft_strlcat.c \
+ft_strlcpy.c \
+ft_strlen.c \
+ft_strmapi.c \
+ft_strncmp.c \
+ft_strnstr.c \
+ft_strrchr.c \
+ft_strtrim.c \
+ft_substr.c \
+ft_tolower.c \
+ft_toupper.c \
+ft_lstnew.c \
+ft_lstadd_front.c \
+ft_lstsize.c \
+ft_lstlast.c \
+ft_lstadd_back.c \
+ft_lstdelone.c \
+ft_lstclear.c \
+ft_lstiter.c \
+ft_lstmap.c \
+get_next_line.c \
+get_next_line_utils.c
 
-BONUS			=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
-					ft_lstsize_bonus.c ft_lstlast_bonus.c \
-					ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-					ft_lstclear_bonus.c ft_lstiter_bonus.c \
-					ft_lstmap_bonus.c
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+DIR_SRCS	=	srcs/
+DIR_OBJS	=	objs/
 
-CC				= @cc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+SOURCE		=	$(addprefix ${DIR_SRCS}, ${SRCS})
+OBJS		=	$(subst ${DIR_SRCS}, ${DIR_OBJS}, $(SOURCE:.c=.o))
 
-NAME			= libft.a
+INCLUDES	=	-I includes
 
-all:			$(NAME)
+CC			=	@cc
+CFLAGS		=	-Wall -Wextra -Werror
 
-$(NAME):		$(OBJS)
-				@ar rcs $(NAME) $(OBJS)
+all:		$(NAME)
+
+$(DIR_OBJS)%.o :	$(DIR_SRCS)%.c | $(DIR_OBJS)
+			$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(DIR_OBJS):
+	mkdir -p $(DIR_OBJS)
+
+$(NAME):	$(OBJS)
+			@ar -rcs $(NAME) $(OBJS)
 
 clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
+			@rm -rf $(OBJS)
+			@rm -rf $(DIR_OBJS)
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:		clean
+			@rm -rf $(NAME)
 
-re:				fclean $(NAME)
+re:			fclean all
 
-bonus:			$(BONUS_OBJS)
-				ar rcs $(NAME) $(BONUS_OBJS)
-
-.PHONY:			all clean fclean re bonus
+.PHONY:		all clean fclean re

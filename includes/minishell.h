@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 14:31:31 by smessal           #+#    #+#             */
-/*   Updated: 2023/03/06 20:06:41 by zel-kass         ###   ########.fr       */
+/*   Created: 2023/07/15 20:55:18 by aminko            #+#    #+#             */
+/*   Updated: 2023/07/15 20:55:18 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "lexer.h"
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include <limits.h>
 
 extern int	g_status;
@@ -145,11 +145,10 @@ void			wait_all(t_data *data, t_cmdtab *tab);
 int				len_tab(char **tab);
 char			**export(char **env, char **var_exp);
 char			**multi_export(char **env, char *var_exp);
-int				is_inv_identif(char c);
+int				arg_err(char c);
 int				existing_var(char **env, char *var_exp);
 void			print_export(t_cmdtab *tab, char **env);
 char			**converted_env(char **env);
-char			*ft_strdup_quote(char *env);
 int				is_builtin(t_cmdtab *tab);
 char			**init_unseted(char **env, char *varname);
 char			**unset(char **env, char *varname);
@@ -157,7 +156,6 @@ void			env_print(char **env, int fd);
 void			pwd(int fd);
 int				change_dir(char *path);
 void			env_print(char **env, int fd);
-int				is_there_n(char **cmd);
 void			echo(char **cmd, int fd);
 char			**ft_strdup_tab(char **tab);
 int				is_numeric(char *str);
@@ -179,7 +177,6 @@ int				check_redir(t_cmdtab *tab);
 void			cmd_error(char *cmd);
 void			file_error(char *file);
 int				check_access(t_data *data, t_cmdtab *tab);
-int				is_inv_identif(char c);
 int				error_export(char *var_exp);
 void			error_export_print(char *var_exp);
 int				consecutive_redir(char *prompt, t_tks *tks);
