@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-char	*fill_2_ouf(char *str, int len, int *k)
+char *fill_2_ouf(char *str, int len, int *k)
 {
-	int		j;
-	char	*ret;
+	int j;
+	char *ret;
 
 	ret = collect(sizeof(char) * (len + 1));
 	if (!ret)
@@ -31,22 +31,20 @@ char	*fill_2_ouf(char *str, int len, int *k)
 	return (ret);
 }
 
-int	compute_new_len(char *prompt, t_tks *tks)
+int compute_new_len(char *prompt, t_tks *tks)
 {
-	int	i;
-	int	len;
+	int i;
+	int len;
 
 	i = 0;
 	len = 0;
 	while (prompt && prompt[i])
 	{
-		if ((prompt[i] == '>' || prompt[i] == '<')
-			&& (prompt[i + 1] != '<' && prompt[i + 1] != '>'))
+		if ((prompt[i] == '>' || prompt[i] == '<') && (prompt[i + 1] != '<' && prompt[i + 1] != '>'))
 		{
 			if (!in_quotes(tks, prompt, i))
-				if (prompt[i + 1] && prompt[i + 1] != ' '
-					&& prompt[i + 1] != '\t')
-				len++;
+				if (prompt[i + 1] && prompt[i + 1] != ' ' && prompt[i + 1] != '\t')
+					len++;
 		}
 		i++;
 		len++;
@@ -54,22 +52,20 @@ int	compute_new_len(char *prompt, t_tks *tks)
 	return (len);
 }
 
-char	*clean_2_ouf(char *prompt, t_tks *tks)
+char *clean_2_ouf(char *prompt, t_tks *tks)
 {
-	int		i;
-	int		j;
-	char	*clean;
+	int i;
+	int j;
+	char *clean;
 
 	i = 0;
 	j = 0;
-	clean = collect(sizeof(char) * (compute_new_len(prompt, tks) + 1));
+	clean = malloc(sizeof(char) * (compute_new_len(prompt, tks) + 1));
 	if (!clean)
 		return (NULL);
 	while (prompt[i])
 	{
-		if ((prompt[i] == '<' || prompt[i] == '>')
-			&& (prompt[i + 1] != '<' && prompt[i + 1] != '>')
-			&& (!in_quotes(tks, prompt, i)))
+		if ((prompt[i] == '<' || prompt[i] == '>') && (prompt[i + 1] != '<' && prompt[i + 1] != '>') && (!in_quotes(tks, prompt, i)))
 		{
 			if (prompt[i + 1] && prompt[i + 1] != ' ' && prompt[i + 1] != '\t')
 			{
@@ -80,13 +76,14 @@ char	*clean_2_ouf(char *prompt, t_tks *tks)
 		clean[j++] = prompt[i++];
 	}
 	clean[j] = '\0';
+	free(clean);
 	return (clean);
 }
 
-int	last_len(char *final, t_tks *tks)
+int last_len(char *final, t_tks *tks)
 {
-	int	i;
-	int	len;
+	int i;
+	int len;
 
 	i = 0;
 	len = 0;
@@ -105,12 +102,12 @@ int	last_len(char *final, t_tks *tks)
 	return (len);
 }
 
-int	rep_tok(char *str)
+int rep_tok(char *str)
 {
-	int		i;
-	int		j;
-	int		len;
-	char	*tok;
+	int i;
+	int j;
+	int len;
+	char *tok;
 
 	i = 0;
 	len = 0;

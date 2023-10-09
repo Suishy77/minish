@@ -12,10 +12,13 @@
 
 #include "minishell.h"
 
-int	g_status;
+int g_status;
 
-void	minishell_exec(t_data *data, t_cmdtab *tab)
+void minishell_exec(t_data *data, t_cmdtab *tab)
 {
+	char *empty = getenv("EMPTY");
+	if (empty == NULL)
+		return;
 	if (is_builtin(tab))
 	{
 		close_pipes(data);
@@ -35,9 +38,9 @@ void	minishell_exec(t_data *data, t_cmdtab *tab)
 	}
 }
 
-void	minishell(t_data *data, t_cmdtab *tab, int i)
+void minishell(t_data *data, t_cmdtab *tab, int i)
 {
-	t_cmdtab	*last;
+	t_cmdtab *last;
 
 	last = lstlast(tab);
 	if (check_redir(tab))
@@ -54,10 +57,10 @@ void	minishell(t_data *data, t_cmdtab *tab, int i)
 	}
 }
 
-void	exec(t_cmdtab *tab, t_data *data)
+void exec(t_cmdtab *tab, t_data *data)
 {
-	int			i;
-	t_cmdtab	*tmp;
+	int i;
+	t_cmdtab *tmp;
 
 	i = 0;
 	tmp = tab;
@@ -66,7 +69,7 @@ void	exec(t_cmdtab *tab, t_data *data)
 	{
 		data->pid[i] = fork();
 		if (data->pid[i] < 0)
-			return ;
+			return;
 		signal(SIGINT, child_signal);
 		signal(SIGQUIT, child_signal);
 		if (data->pid[i] == 0)
@@ -80,12 +83,12 @@ void	exec(t_cmdtab *tab, t_data *data)
 	wait_all(data, tmp);
 }
 
-void	mini_loop(char **env)
+void mini_loop(char **env)
 {
-	char		*prompt;
-	char		**lex;
-	t_cmdtab	*tab;
-	t_data		*data;
+	char *prompt;
+	char **lex;
+	t_cmdtab *tab;
+	t_data *data;
 
 	tab = NULL;
 	while (1)
@@ -94,22 +97,22 @@ void	mini_loop(char **env)
 		signal(SIGQUIT, SIG_IGN);
 		prompt = readline("minishell> ");
 		if (!prompt)
-			break ;
+			break;
 		if (prompt[0])
 			add_history(prompt);
 		lex = lexer(prompt, env);
 		init_par_data(lex, &tab, &data, env);
 		if (!lex || !tab || !data)
-			continue ;
+			continue;
 		free(prompt);
 		exec_final(tab, data);
 		env = ft_strdup_tab(data->env);
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	char		**env;
+	char **env;
 
 	if (!isatty(STDIN_FILENO))
 	{
