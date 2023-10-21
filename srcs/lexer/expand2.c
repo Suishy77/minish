@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:14 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:53:16 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/21 18:38:58 by dopenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ char	*get_varname(char *prompt, int start, int end)
 	return (varname);
 }
 
-int	find_varname_env(char *var, char *env_var)
-{
-	if (env_var && var && !ft_strncmp(var, env_var, ft_strlen(var))
-		&& ft_strchr(env_var, '=') == ft_strlen(var))
-		return (1);
-	else
-		return (0);
+int find_varname_env(char *var, char *env_var) {
+    if (env_var && var && !ft_strncmp(var, env_var, ft_strlen(var)) && env_var[ft_strlen(var)] == '=')
+        return (1);
+    else
+        return (0);
 }
 
 char	*expand_err_code(char *prompt, int start, int end)
@@ -64,26 +62,32 @@ char	*expand_err_code(char *prompt, int start, int end)
 	return (expanded);
 }
 
-char	*get_var(char *prompt, char **env, int start, int end)
-{
-	char	*varname;
-	char	*var;
-	int		i;
+char *get_var(char *prompt, char **env, int start, int end) {
+    char *varname = get_varname(prompt, start, end);
+    char *var = NULL;
+    int i = 0;
 
-	varname = get_varname(prompt, start, end);
-	var = NULL;
-	if (prompt[start] == '?')
-		var = expand_err_code(prompt, start, end);
-	else if (!varname[0] && start == end)
-		var = allocate_str("$");
-	else if (!varname[0])
-		var = allocate_str("\n");
-	i = 0;
-	while (env && env[i] && varname && varname[0])
-	{
-		if (find_varname_env(varname, env[i]))
-			var = ft_strdup(&env[i][ft_strlen(varname) + 1]);
-		i++;
-	}
-	return (var);
+    if (prompt[start] == '?') {
+        var = expand_err_code(prompt, start, end);
+    } else if (varname && varname[0] == '\0') {
+        // Cas où le nom de la variable est vide
+        var = allocate_str("");
+    } else {
+        // Par défaut, la variable n'existe pas
+        var = allocate_str("");
+
+        i = 0;
+        while (env && env[i]) {
+            if (find_varname_env(varname, env[i])) {
+                // Si la variable d'environnement correspond, copiez sa valeur
+                var = ft_strdup(&env[i][ft_strlen(varname) + 1]);
+                break;
+            }
+            i++;
+        }
+    }
+
+    // Assurez-vous de libérer la mémoire allouée pour le nom de la variable
+    free(varname);
+    return var;
 }

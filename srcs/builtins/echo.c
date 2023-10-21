@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:31:12 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/14 17:31:13 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/21 17:57:08 by dopenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,37 @@ int	ft_echo(char *str, int fd)
 	}
 	return (1);
 }
+int is_quoted(char *str) {
+    return (str[0] == '"' || str[0] == '\'') && str[ft_strlen(str) - 1] == str[0];
+}
 
-void	echo(char **cmd, int fd)
-{
-	int	i;
-	int	flag;
+void echo(char **cmd, int fd) {
+    int i;
+    int flag;
 
-	g_status = 0;
-	flag = find_n(cmd + 1);
-	i = flag;
-	while (cmd && cmd[i])
-	{
-		if (!ft_echo(cmd[i], fd))
-			break ;
-		if (cmd[i + 1])
-			ft_putstr_fd(" ", fd);
-		i++;
-	}
-	if (flag == 1)
-		write(fd, "\n", 1);
-	if (fd > 1)
-		close(fd);
+    g_status = 0;
+    flag = find_n(cmd + 1);
+    i = flag;
+    while (cmd && cmd[i]) {
+        if (i > flag) {
+            ft_putstr_fd(" ", fd); // Ajoutez un espace avant chaque argument sauf le premier
+        }
+
+        // Si l'argument est entre guillemets, imprimez-le tel quel
+        if (is_quoted(cmd[i])) {
+            // Supprimez les guillemets autour de l'argument
+            ft_putstr_fd(cmd[i] + 1, fd);
+            cmd[i][ft_strlen(cmd[i]) - 1] = '\0';
+        } else {
+            ft_putstr_fd(cmd[i], fd); // Sinon, imprimez l'argument tel quel
+        }
+
+        i++;
+    }
+    if (flag == 1) {
+        write(fd, "\n", 1);
+    }
+    if (fd > 1) {
+        close(fd);
+    }
 }

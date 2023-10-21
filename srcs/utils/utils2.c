@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:49:45 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:49:55 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/21 17:45:10 by dopenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,18 @@ int	numlen(long long int num)
 	return (i);
 }
 
-int	is_numeric(char *str)
-{
-	if (numlen(ft_atol(str)) == ft_strlen(str))
-		return (1);
-	return (0);
+int is_numeric(char *str) {
+    int i = 0;
+    if (str[0] == '+' || str[0] == '-') {
+        i = 1;
+    }
+    while (str[i] != '\0') {
+        if (str[i] < '0' || str[i] > '9') {
+            return 0; // Non-numeric character found
+        }
+        i++;
+    }
+    return 1; // All characters are numeric
 }
 
 int	is_char_num(char c)
