@@ -6,7 +6,7 @@
 /*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:08 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/21 18:35:04 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:07:48 by dopenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,39 +73,65 @@ int	no_expand_hd(char *prompt, int dol, t_tks *tks)
 	return (1);
 }
 
-char *expand(char *pro, char **env, t_tks *tks) {
-    char *expanded;
-    t_expand *id;
+char	*expand(char *pro, char **env, t_tks *tks)
+{
+	char		*expanded;
+	t_expand	*id;
 
-    id = init_expand(env);
-    expanded = collect(sizeof(char) * (len_expand(pro, tks, env) * 2 + 1)); // Taille maximale
-    if (!expanded) {
-        return NULL;
-    }
-
-    while (pro && pro[id->i]) {
-        id->k = 0;
-        if (pro[id->i] == '$' && tks->dol[id->l++] && no_expand_hd(pro, id->i, tks)) {
-            // Vérifiez si c'est un symbole "$"
-            if (pro[id->i + 1] == '\0' || pro[id->i + 1] == ' ' || is_token(pro[id->i + 1])) {
-                // Si c'est suivi d'un espace ou d'un caractère de token, imprimez simplement "$"
-                expanded[id->j++] = '$';
-            } else {
-                id->start = ++id->i;
-                while (pro[id->i] && pro[id->i] != ' ' && !is_token(pro[id->i])) {
-                    id->i++;
-                }
-                id->var = get_var(pro, env, id->start, id->i);
-                while (id->var && id->var[id->k]) {
-                    expanded[id->j++] = id->var[id->k++];
-                }
-            }
-        } else {
-            expanded[id->j++] = pro[id->i++];
-        }
-    }
-
-    expanded[id->j] = '\0';
-    return expanded;
+	id = init_expand(env);
+	expanded = collect(sizeof(char) * (len_expand(pro, tks, env) * 2 + 1));
+	if (!expanded)
+		return (NULL);
+	while (pro && pro[id->i])
+	{
+		id->k = 0;
+		if (pro[id->i] == '$' && tks->dol[id->l++]
+			&& no_expand_hd(pro, id->i, tks))
+			process_dollar(pro, id, expanded, env);
+		else
+			expanded[id->j++] = pro[id->i++];
+	}
+	expanded[id->j] = '\0';
+	return (expanded);
 }
 
+/*char	*expand(char *pro, char **env, t_tks *tks)
+{
+	char		*expanded;
+	t_expand	*id;
+
+	id = init_expand(env);
+	expanded = collect(sizeof(char) * (len_expand(pro, tks, env) * 2 + 1));
+	if (!expanded)
+		return (NULL);
+	while (pro && pro[id->i])
+	{
+		id->k = 0;
+		if (pro[id->i] == '$' && tks->dol[id->l++]
+			&& no_expand_hd(pro, id->i, tks))
+		{
+			if (pro[id->i + 1] == '\0' || pro[id->i + 1] == ' '
+				|| is_token(pro[id->i + 1]))
+			{
+				expanded[id->j++] = '$';
+				id->i++;
+			}
+			else
+			{
+				id->start = ++id->i;
+				while (pro[id->i] && pro[id->i] != ' ' && !is_token(pro[id->i]))
+				{
+					id->i++;
+				}
+				id->var = get_var(pro, env, id->start, id->i);
+				while (id->var && id->var[id->k])
+					expanded[id->j++] = id->var[id->k++];
+			}
+		}
+		else
+			expanded[id->j++] = pro[id->i++];
+	}
+	expanded[id->j] = '\0';
+	return (expanded);
+}
+*/

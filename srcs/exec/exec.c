@@ -6,7 +6,7 @@
 /*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/21 17:08:24 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:04:32 by dopenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		**env;
 
-	//if (!isatty(STDIN_FILENO))
-	//{
-	//	ft_putstr_fd("OOPS! Error !\n", 2);
-	//	exit(2);
-	//}
+	/*if (!isatty(STDIN_FILENO))
+	{
+		ft_putstr_fd("OOPS! Error !\n", 2);
+		exit(2);
+	}*/
 	env = ft_strdup_tab(envp);
 	(void)argc;
 	(void)argv;

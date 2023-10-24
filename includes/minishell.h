@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:55:18 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:55:18 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 18:03:58 by dopenas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,11 @@ char			*allocate_str(char *str);
 int				len_tab(char **tab);
 int				is_char_num(char c);
 long long int	ft_atol(const char *nptr);
+void			handle_single_dollar(t_expand *id, char *expanded);
+void			expand_variable(char *pro, t_expand *id,
+					char *expanded, char **env);
+void			process_dollar(char *pro, t_expand *id,
+					char *expanded, char **env);
 
 /*-------------------ERROR------------------*/
 
