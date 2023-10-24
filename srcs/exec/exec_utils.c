@@ -6,19 +6,19 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:43 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:52:44 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/25 00:38:13 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_data	*init_data_struct(t_cmdtab *tab, char **env)
+t_data *init_data_struct(t_cmdtab *tab, char ***env)
 {
-	t_data	*data;
-	int		i;
+	t_data *data;
+	int i;
 
 	i = 0;
-	data = collect(sizeof(t_data));
+	data = calloc(sizeof(t_data), 1);
 	if (!data)
 		return (NULL);
 	data->p_count = lstsize(tab);
@@ -35,15 +35,17 @@ t_data	*init_data_struct(t_cmdtab *tab, char **env)
 			return (NULL);
 		i++;
 	}
-	data->env = NULL;
 	if (env)
-		data->env = ft_strdup_tab(env);
+	{
+		data->env = ft_strdup_tab(*env);
+		*env = ft_free_tab(*env);
+	}
 	return (data);
 }
 
-void	close_all_fds(t_cmdtab *tab)
+void close_all_fds(t_cmdtab *tab)
 {
-	t_cmdtab	*temp;
+	t_cmdtab *temp;
 
 	temp = tab;
 	while (temp)
@@ -64,15 +66,18 @@ void	close_all_fds(t_cmdtab *tab)
 	}
 }
 
-void	init_par_data(char **lex, t_cmdtab **tab, t_data **data, char **env)
+void init_par_data(char **lex, t_cmdtab **tab, t_data **data, char ***env)
 {
 	if (lex)
 		*tab = parser(lex);
 	if (tab)
+	{
 		*data = init_data_struct(*tab, env);
+		add_front(singleton(), *data, DATA);
+	}
 }
 
-void	exec_final(t_cmdtab *tab, t_data *data)
+void exec_final(t_cmdtab *tab, t_data *data)
 {
 	if (is_builtin(tab) && data->p_count == 1 && check_redir(tab))
 		launch_builtin(tab, data);
@@ -81,9 +86,9 @@ void	exec_final(t_cmdtab *tab, t_data *data)
 	close_all_fds(tab);
 }
 
-void	wait_all(t_data *data, t_cmdtab *tab)
+void wait_all(t_data *data, t_cmdtab *tab)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (tab && waitpid(data->pid[i], &g_status, 0) > 0)

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:55:17 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:20:33 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 20:24:39 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_strchr(const char *s, int c)
 	}
 	return (0);
 }
+
 
 /*
 int main(void)

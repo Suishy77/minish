@@ -50,7 +50,7 @@ OBJS			=	$(addprefix $(DIR_OBJS)/,$(OBJS_NAMES))
 
 HEAD			=	-Iincludes/ -Ilibft/includes/
 CC				=	cc
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-g3 -Wall -Werror -Wextra
 RM				=	rm -rf
 
 all: $(NAME)

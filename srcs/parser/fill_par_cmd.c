@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:26 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:26 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/25 01:01:32 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**get_paths(char **env)
 	int		i;
 	char	*path_var;
 	char	**env_path;
+	char	*tmp;
 
 	i = 0;
 	env_path = NULL;
@@ -31,9 +32,12 @@ char	**get_paths(char **env)
 		i++;
 	}
 	i = -1;
-	while (env_path && env_path[++i]
-		&& env_path[i][ft_strlen(env_path[i]) - 1] != '/')
+	while (env_path && env_path[++i] && env_path[i][ft_strlen(env_path[i]) - 1] != '/')
+	{
+		tmp = env_path[i];
 		env_path[i] = ft_strjoin(env_path[i], "/");
+		free(tmp);
+	}
 	return (env_path);
 }
 
@@ -66,7 +70,7 @@ char	**get_opt(char **split)
 	i = 0;
 	j = 0;
 	opt = NULL;
-	opt = collect(sizeof(char *) * (len_cmd(split) + 1));
+	opt = calloc(sizeof(char *), (len_cmd(split) + 1));
 	if (!opt)
 		return (NULL);
 	while (split && split[i] && opt)
@@ -114,8 +118,9 @@ char	*get_abs_path(char **paths, char **opt)
 		abs = ft_strjoin(ft_strdup(paths[i]), opt[0]);
 		if (access(abs, F_OK | X_OK) == 0)
 			break ;
-		abs = NULL;
+		ft_free_elem((void **)&abs);
 		i++;
 	}
+	ft_free_tab(paths);
 	return (abs);
 }

@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 18:04:32 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/25 01:02:30 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_status;
+int g_status;
 
-void	minishell_exec(t_data *data, t_cmdtab *tab)
+void minishell_exec(t_data *data, t_cmdtab *tab)
 {
 	if (is_builtin(tab))
 	{
 		close_pipes(data);
 		launch_builtin(tab, data);
-		free_gc();
+		free_all(tab);
 		exit(0);
 	}
 	else
@@ -29,15 +29,15 @@ void	minishell_exec(t_data *data, t_cmdtab *tab)
 		close_pipes(data);
 		if (execve(tab->cmd, tab->opt, data->env) == -1)
 		{
-			free_gc();
+			free_all(tab);
 			exit(0);
 		}
 	}
 }
 
-void	minishell(t_data *data, t_cmdtab *tab, int i)
+void minishell(t_data *data, t_cmdtab *tab, int i)
 {
-	t_cmdtab	*last;
+	t_cmdtab *last;
 
 	last = lstlast(tab);
 	if (check_redir(tab))
@@ -49,15 +49,15 @@ void	minishell(t_data *data, t_cmdtab *tab, int i)
 	{
 		close_fds_hd(last);
 		close_pipes(data);
-		free_gc();
+		free_all(tab);
 		exit(1);
 	}
 }
 
-void	exec(t_cmdtab *tab, t_data *data)
+void exec(t_cmdtab *tab, t_data *data)
 {
-	int			i;
-	t_cmdtab	*tmp;
+	int i;
+	t_cmdtab *tmp;
 
 	i = 0;
 	tmp = tab;
@@ -66,7 +66,7 @@ void	exec(t_cmdtab *tab, t_data *data)
 	{
 		data->pid[i] = fork();
 		if (data->pid[i] < 0)
-			return ;
+			return;
 		signal(SIGINT, child_signal);
 		signal(SIGQUIT, child_signal);
 		if (data->pid[i] == 0)
@@ -80,12 +80,25 @@ void	exec(t_cmdtab *tab, t_data *data)
 	wait_all(data, tmp);
 }
 
-void	mini_loop(char **env)
+void free_all(t_cmdtab *tab)
 {
-	char		*prompt;
-	char		**lex;
-	t_cmdtab	*tab;
-	t_data		*data;
+	printf("lala2\n");
+	while (tab)
+	{
+		printf("lala\n");
+		tab->opt = ft_free_tab(tab->opt);
+		ft_free_elem((void **)&(tab->cmd));
+		tab = tab->next;
+	}
+	free_gc();
+}
+
+void mini_loop(char ***env)
+{
+	char *prompt;
+	char **lex;
+	t_data *data;
+	t_cmdtab *tab;
 
 	tab = NULL;
 	while (1)
@@ -97,31 +110,33 @@ void	mini_loop(char **env)
 			break ;
 		if (prompt[0])
 			add_history(prompt);
-		lex = lexer(prompt, env);
+		lex = lexer(prompt, *env);
+		free(prompt);
 		init_par_data(lex, &tab, &data, env);
 		if (!lex || !tab || !data)
-			continue ;
-		free(prompt);
+			continue;
 		exec_final(tab, data);
-		env = ft_strdup_tab(data->env);
+		*env = ft_strdup_tab(data->env);
+		free_all(tab);
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	char		**env;
+	char **env;
 
-	/*if (!isatty(STDIN_FILENO))
+	if (!isatty(STDIN_FILENO))
 	{
 		ft_putstr_fd("OOPS! Error !\n", 2);
 		exit(2);
-	}*/
+	}
 	env = ft_strdup_tab(envp);
 	(void)argc;
 	(void)argv;
-	mini_loop(env);
+	mini_loop(&env);
+	if (env)
+		ft_free_tab(env);
 	rl_clear_history();
-	free_gc();
 	ft_putstr_fd("exit\n", 2);
 	return (g_status);
 }

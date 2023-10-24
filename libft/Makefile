@@ -6,7 +6,7 @@
 #    By: aminko <aminko@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 23:14:10 by aminko            #+#    #+#              #
-#    Updated: 2023/07/15 20:23:39 by aminko           ###   ########.fr        #
+#    Updated: 2023/10/21 19:49:29 by aminko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME		=	libft.a
 SRCS = ft_printf.c ft_printf_utils.c \
 ft_puthex.c \
 ft_atoll.c \
-ft_strcmp.c \
 ft_swap.c \
 ft_atoi.c \
 ft_bzero.c \
@@ -61,7 +60,9 @@ ft_lstclear.c \
 ft_lstiter.c \
 ft_lstmap.c \
 get_next_line.c \
-get_next_line_utils.c
+count_word.c \
+ft_free_tab.c \
+ft_strcmp.c \
 
 
 DIR_SRCS	=	srcs/

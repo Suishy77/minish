@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:43 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:44 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 21:47:27 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_cmdtab	*parser(char **lexer)
 	int			i;
 	char		**spl;
 	t_cmdtab	*tab;
-
+	
 	i = 0;
 	tab = NULL;
 	spl = NULL;

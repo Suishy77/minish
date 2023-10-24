@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:14 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/23 20:51:57 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/25 00:43:42 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_varname(char *prompt, int start, int end)
 	int		i;
 
 	i = 0;
-	varname = collect(sizeof(char) * (end - start + 1));
+	varname = malloc(sizeof(char) * (end - start + 1));
 	if (!varname)
 		return (NULL);
 	while (prompt && prompt[start] && start < end)

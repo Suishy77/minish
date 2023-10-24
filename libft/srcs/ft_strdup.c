@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:57:25 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/13 14:49:43 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/07 20:06:55 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 char	*ft_strdup(const char *s)
 {
 	char	*str;
-	size_t	len;
-	size_t	i;
+	int		i;
 
-	len = ft_strlen(s);
 	i = 0;
-	str = (char *)malloc(sizeof(char) * (len + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!str)
-		return (NULL);
-	while (i < len)
+		return (0);
+	while (s[i])
 	{
 		str[i] = s[i];
 		i++;
@@ -32,14 +30,3 @@ char	*ft_strdup(const char *s)
 	str[i] = '\0';
 	return (str);
 }
-
-/* #include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-	char str[] = "bonjour";
-	printf("%s", ft_strdup(str));
-	return (0);
-}
- */

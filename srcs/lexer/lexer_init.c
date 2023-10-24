@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:41 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:53:42 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 22:49:09 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_tks	*init_tokens(char *str)
 	tks->dol = collect(sizeof(int) * count_elem(str, '$'));
 	tks->qst = collect(sizeof(int) * count_elem(str, '?'));
 	tks->prompt = ft_strdup(str);
+	add_front(singleton(), tks->prompt, CHAR_PTR);
 	return (tks);
 }
 

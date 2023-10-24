@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:08 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 17:11:45 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/25 00:47:52 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	expand_variable(char *pro, t_expand *id, char *expanded, char **env)
 	id->var = get_var(pro, env, id->start, id->i);
 	while (id->var && id->var[id->k])
 		expanded[id->j++] = id->var[id->k++];
+	free(id->var);
 }
 
 void	process_dollar(char *pro, t_expand *id, char *expanded, char **env)

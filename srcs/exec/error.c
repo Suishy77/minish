@@ -6,13 +6,13 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:38 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:52:39 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 21:43:13 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_status(char *cmd)
+void check_status(char *cmd)
 {
 	if (g_status == 127)
 	{
@@ -20,8 +20,7 @@ void	check_status(char *cmd)
 		ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
-	else if (g_status == 126 && access(cmd, F_OK) == 0
-		&& access(cmd, X_OK) == -1)
+	else if (g_status == 126 && access(cmd, F_OK) == 0 && access(cmd, X_OK) == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd, 2);
@@ -29,7 +28,7 @@ void	check_status(char *cmd)
 	}
 }
 
-void	conditions_access(t_data *data, t_cmdtab *tab)
+void conditions_access(t_data *data, t_cmdtab *tab)
 {
 	if (!data->env || !tab->cmd)
 	{
@@ -39,24 +38,23 @@ void	conditions_access(t_data *data, t_cmdtab *tab)
 			data->is_abs = 1;
 		}
 	}
-	if (access(tab->opt[0], F_OK) == 0
-		&& access(tab->opt[0], X_OK) == -1)
+	if (access(tab->opt[0], F_OK) == 0 && access(tab->opt[0], X_OK) == -1)
 	{
 		close_final_fd(tab);
 		close_pipes(data);
-		free_gc();
+		free_all(tab);
 		exit(126);
 	}
 	if (!tab->cmd && tab->opt[0])
 	{
 		close_final_fd(tab);
 		close_pipes(data);
-		free_gc();
+		free_all(tab);
 		exit(127);
 	}
 }
 
-int	check_access(t_data *data, t_cmdtab *tab)
+int check_access(t_data *data, t_cmdtab *tab)
 {
 	if (!is_builtin(tab) && tab->opt && tab->opt[0])
 	{
@@ -66,7 +64,7 @@ int	check_access(t_data *data, t_cmdtab *tab)
 	return (0);
 }
 
-int	check_redir(t_cmdtab *tab)
+int check_redir(t_cmdtab *tab)
 {
 	if (tab->in && tab->in->fd < 0)
 		return (0);

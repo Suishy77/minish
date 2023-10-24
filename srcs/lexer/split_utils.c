@@ -6,17 +6,17 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:53 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:53:54 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 23:26:12 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_pipes(char *str, t_tks *tks)
+int count_pipes(char *str, t_tks *tks)
 {
-	int	i;
-	int	j;
-	int	count;
+	int i;
+	int j;
+	int count;
 
 	i = 0;
 	j = 0;
@@ -30,13 +30,13 @@ int	count_pipes(char *str, t_tks *tks)
 	return (count + 1);
 }
 
-int	*pipe_strlen(char *str, t_tks *tks)
+int *pipe_strlen(char *str, t_tks *tks)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	count;
-	int	*lens;
+	int i;
+	int j;
+	int k;
+	int count;
+	int *lens;
 
 	i = 0;
 	j = 0;
@@ -59,10 +59,10 @@ int	*pipe_strlen(char *str, t_tks *tks)
 	return (lens);
 }
 
-void	cwords(char *str, int *count)
+void cwords(char *str, int *count)
 {
-	int		i;
-	char	c;
+	int i;
+	char c;
 
 	i = 0;
 	while (str && str[i])
@@ -86,10 +86,10 @@ void	cwords(char *str, int *count)
 	}
 }
 
-int	wdlen(char *str, int i)
+int wdlen(char *str, int i)
 {
-	int		len;
-	char	c;
+	int len;
+	char c;
 
 	len = 0;
 	while (str[i] && (str[i] != ' ' && str[i] != '\t'))
@@ -104,19 +104,19 @@ int	wdlen(char *str, int i)
 				len++;
 		}
 		if (i >= ft_strlen(str) || str[i] == ' ' || str[i] == '\t')
-			break ;
+			break;
 		i++;
 		len++;
 	}
 	return (len);
 }
 
-char	*fill_wrd(char *s, int *i)
+char *fill_wrd(char *s, int *i)
 {
-	int		j;
-	int		k;
-	char	c;
-	char	*ret;
+	int j;
+	int k;
+	char c;
+	char *ret;
 
 	j = 0;
 	k = *i;

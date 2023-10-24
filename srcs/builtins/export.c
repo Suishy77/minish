@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:30:54 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 16:18:30 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/24 22:47:27 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ char	**multi_export(char **env, char *var_exp)
 
 	i = 0;
 	if (!existing_var(env, var_exp))
-		exported = collect(sizeof(char *) * (len_tab(env) + 2));
+		exported = malloc(sizeof(char *) * (len_tab(env) + 2));
 	else
-		exported = collect(sizeof(char *) * (len_tab(env) + 1));
+		exported = malloc(sizeof(char *) * (len_tab(env) + 1));
 	if (!exported)
 		return (NULL);
 	if (existing_var(env, var_exp) == 1)
@@ -88,7 +88,7 @@ char	**export(char **env, char **var_exp)
 	char	**exported;
 
 	j = 1;
-	exported = collect(sizeof(char *) * (len_tab(env) + len_tab(var_exp) + 1));
+	exported = malloc(sizeof(char *) * (len_tab(env) + len_tab(var_exp) + 1));
 	if (!exported)
 		return (NULL);
 	while (env && var_exp && var_exp[j])

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:49:50 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:49:52 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/25 00:45:13 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_strdup_tab(char **tab)
 	char	**dupl;
 
 	i = 0;
-	dupl = collect(sizeof(char *) * (len_tab(tab) + 1));
+	dupl = malloc(sizeof(char *) * (len_tab(tab) + 1));
 	if (!dupl)
 		return (NULL);
 	while (tab && tab[i])
@@ -82,7 +82,7 @@ char	*allocate_str(char *str)
 	char	*allocated;
 
 	i = 0;
-	allocated = collect(sizeof(char) * (ft_strlen(str) + 1));
+	allocated = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!allocated)
 		return (NULL);
 	while (str && str[i])

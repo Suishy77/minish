@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   countf_word.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 16:55:30 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/07 20:00:44 by aminko           ###   ########.fr       */
+/*   Created: 2023/10/07 20:44:32 by aminko            #+#    #+#             */
+/*   Updated: 2023/10/07 20:44:42 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* renvoie un pointeur sur la dernière occurrence
-du caractère c dans la chaîne s. */
-
-char	*ft_strrchr(const char *s, int c)
+int	count_word(char const *s, char c)
 {
-	int		i;
+	int	i;
+	int	res;
 
-	i = ft_strlen(s);
-	if (c == 0)
-		return ((char *)s + i);
-	while (i >= 0)
+	i = 0;
+	res = 0;
+	while (s[i])
 	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i--;
+		while (s[i] == c && s[i])
+			i++;
+		if (s[i] != c && s[i])
+		{
+			res++;
+			while (s[i] != c && s[i])
+				i++;
+		}
 	}
-	return (NULL);
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:00 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:01 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/25 00:49:41 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	is_unvalid(char c)
 			result = 1;
 		i++;
 	}
+	free(unvalid);
 	return (result);
 }
 

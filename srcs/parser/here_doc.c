@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:34 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:34 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/25 00:07:50 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	init_hd(char *split, char *hd_name, t_file *in, t_cmdtab *tab)
 		in->fd = open(hd_name, O_WRONLY | O_CREAT, 0777);
 		here_doc(split, in->fd);
 		close_fds_hd(tab);
-		free_gc();
+		free_all(tab);
 		exit(0);
 	}
-	waitpid(pid, 0, 0);
+	waitpid(pid, NULL, 0);
 	if (g_status != 130)
 		in->fd = open(hd_name, O_RDONLY);
 	else

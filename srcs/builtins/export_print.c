@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:26:00 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/14 17:37:14 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 22:44:28 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*dup_quotes(char *env)
 	i = -1;
 	j = 0;
 	flag = 1;
-	s = collect(sizeof(char) * (ft_strlen(env) + 3));
+	s = malloc(sizeof(char) * (ft_strlen(env) + 3));
 	if (!s)
 		return (NULL);
 	while (env && env[++i])
@@ -47,7 +47,7 @@ char	**converted_env(char **env)
 	char	**converted;
 
 	i = -1;
-	converted = collect(sizeof(char *) * (len_tab(env) + 1));
+	converted = malloc(sizeof(char *) * (len_tab(env) + 1));
 	if (!converted)
 		return (NULL);
 	while (env && env[++i])
@@ -75,6 +75,7 @@ void	print_export(t_cmdtab *tab, char **env)
 		i++;
 	}
 	g_status = 0;
+	ft_free_tab(env_export);
 	if (fd > 1)
 		close(fd);
 }

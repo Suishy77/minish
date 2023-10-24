@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:42:56 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:15:28 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/24 20:21:15 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,10 @@ int	ft_strlen(const char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
-
-/* int main(void)
-{
-	char *str = "bounjour";
-	printf("%d", ft_strlen(str));
-	return(0);
-}
- */

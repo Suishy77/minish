@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:57:14 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/19 14:14:14 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/07 20:44:58 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@
 ** retourne un tableau de chaînes de caractères obtenu
 ** en séparant ’s’ à l’aide du caractère ’c’, utilisé comme délimiteur.
 */
-
-static int	count_word(char const *s, char c)
-{
-	int	i;
-	int	res;
-
-	i = 0;
-	res = 0;
-	while (s[i])
-	{
-		while (s[i] == c && s[i])
-			i++;
-		if (s[i] != c && s[i])
-		{
-			res++;
-			while (s[i] != c && s[i])
-				i++;
-		}
-	}
-	return (res);
-}
 
 static char	*get_word(char const *s, char c, int *index)
 {
