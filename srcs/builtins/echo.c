@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:31:12 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 16:23:38 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:07:00 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	echo(char **cmd, int fd)
 			ft_putstr_fd(" ", fd);
 		if (is_quoted(cmd[i]))
 		{
-			ft_putstr_fd(cmd[i] + 1, fd);
+			ft_putstr_fd(cmd[i], fd);
 			cmd[i][ft_strlen(cmd[i]) - 1] = '\0';
 		}
 		else

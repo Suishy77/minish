@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 01:02:30 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 00:04:28 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void free_all(t_cmdtab *tab)
 	printf("lala2\n");
 	while (tab)
 	{
-		printf("lala\n");
 		tab->opt = ft_free_tab(tab->opt);
+		printf("lala\n");
 		ft_free_elem((void **)&(tab->cmd));
 		tab = tab->next;
 	}
@@ -117,8 +117,9 @@ void mini_loop(char ***env)
 			continue;
 		exec_final(tab, data);
 		*env = ft_strdup_tab(data->env);
-		free_all(tab);
+		tab->opt = ft_free_tab(tab->opt);
 	}
+	free_all(tab);
 }
 
 int main(int argc, char **argv, char **envp)

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:26 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 01:01:32 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/25 21:50:31 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,20 @@ char	*get_abs_path(char **paths, char **opt)
 {
 	int		i;
 	char	*abs;
+	char	*tmp;
 
 	i = 0;
 	abs = NULL;
+	tmp = NULL;
 	if (!check_abs(opt[0]))
 		return (abs);
 	while (paths && paths[i] && opt[0])
 	{
-		abs = ft_strjoin(ft_strdup(paths[i]), opt[0]);
+		tmp = ft_strdup(paths[i]);
+		abs = ft_strjoin(tmp, opt[0]);
 		if (access(abs, F_OK | X_OK) == 0)
 			break ;
+		ft_free_elem((void **)&tmp);
 		ft_free_elem((void **)&abs);
 		i++;
 	}
