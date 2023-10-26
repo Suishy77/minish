@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:20 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:53:24 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 01:01:15 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_actok	*init_actok(void)
 {
 	t_actok	*tok;
 
-	tok = collect(sizeof(t_actok));
+	tok = malloc(sizeof(t_actok));
 	if (!tok)
 		return (NULL);
 	tok->i = 0;
@@ -74,7 +74,6 @@ void	active_s_tokens(char *line, t_tks *tks, char c)
 {
 	t_actok	*ind;
 
-	ind = NULL;
 	ind = init_actok();
 	while (line && line[ind->i])
 	{
@@ -96,4 +95,5 @@ void	active_s_tokens(char *line, t_tks *tks, char c)
 		if (line[ind->i])
 			ind->i++;
 	}
+	free(ind);
 }

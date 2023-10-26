@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dopenas- <dopenas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:49:45 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 16:26:17 by dopenas-         ###   ########.fr       */
+/*   Updated: 2023/10/26 01:41:06 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ int	is_char_num(char c)
 	while (nums && nums[i])
 	{
 		if (c == nums[i])
-			return (1);
+			return (free(nums), 1);
 		i++;
 	}
+	free(nums);
 	return (0);
 }
 

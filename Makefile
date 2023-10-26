@@ -23,6 +23,7 @@ SRCS_NAMES		=	lexer/expand.c \
 					utils/utils.c \
 					utils/utils2.c \
 					utils/utils3.c	\
+					utils/free.c \
 					parser/fill_par_cmd.c \
 					parser/fill_par_red.c \
 					parser/here_doc.c \

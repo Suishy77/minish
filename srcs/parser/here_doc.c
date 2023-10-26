@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:34 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 00:07:50 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 00:26:39 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_file	*fill_hd(int op, char *eof, t_cmdtab *tab, int count)
 
 	hd_name = ft_strjoin_hd(ft_itoa(tab->index), allocate_str("_hd_"));
 	hd_name = ft_strjoin(hd_name, ft_itoa(count));
-	in = collect(sizeof(t_file));
+	in = malloc(sizeof(t_file));
 	if (!in)
 		return (NULL);
 	in->op = op;

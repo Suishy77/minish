@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:31:01 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/14 17:31:03 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 01:41:30 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	arg_err(char c)
 	while (invalid && invalid[i])
 	{
 		if (c == invalid[i])
-			return (1);
+			return (free(invalid), 1);
 		i++;
 	}
-	return (0);
+	return (free(invalid), 0);
 }
 
 int	error_export(char *var_exp)

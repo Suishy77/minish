@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 00:40:09 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 01:59:11 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void free_gc(void)
 		next = collect->next;
 		if (collect->type == DATA)
 		{
+			printf("free_gc\n");
 			ft_free_tab(((t_data *)collect->ptr)->env);
 			free((t_data *)(collect->ptr));
 		}
@@ -80,4 +81,5 @@ void free_gc(void)
 		free(collect);
 		collect = next;
 	}
+	(*singleton()) = NULL;
 }

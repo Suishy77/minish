@@ -6,13 +6,13 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:24 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:52:26 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 03:01:27 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(t_cmdtab *tab)
+int is_builtin(t_cmdtab *tab)
 {
 	if (tab && tab->opt && tab->opt[0])
 	{
@@ -37,10 +37,10 @@ int	is_builtin(t_cmdtab *tab)
 		return (0);
 }
 
-char	*get_pwd(char **env)
+char *get_pwd(char **env)
 {
-	int		i;
-	char	*pwd;
+	int i;
+	char *pwd;
 
 	i = 0;
 	pwd = NULL;
@@ -48,7 +48,7 @@ char	*get_pwd(char **env)
 	{
 		pwd = ft_strnstr(env[i], "PWD=", 4);
 		if (pwd)
-			break ;
+			break;
 		i++;
 	}
 	if (pwd)
@@ -57,13 +57,13 @@ char	*get_pwd(char **env)
 		return (NULL);
 }
 
-char	**prepare_pwd(char **env)
+char **prepare_pwd(char **env)
 {
-	char	**pwds;
-	char	*pwd;
-	char	*oldpwd;
+	char **pwds;
+	char *pwd;
+	char *oldpwd;
 
-	pwds = collect(sizeof(char *) * 4);
+	pwds = malloc(sizeof(char *) * 4);
 	if (!pwds)
 		return (NULL);
 	pwd = NULL;
@@ -75,7 +75,7 @@ char	**prepare_pwd(char **env)
 		if (oldpwd && pwd)
 		{
 			pwds[0] = NULL;
-			pwds[1] = ft_strjoin("PWD=", ft_strdup(pwd));
+			pwds[1] = ft_strjoin("PWD=", pwd);
 			pwds[2] = ft_strjoin("OLDPWD=", oldpwd);
 			pwds[3] = NULL;
 		}
@@ -85,10 +85,8 @@ char	**prepare_pwd(char **env)
 	return (free(pwd), pwds);
 }
 
-void	conditions_cd(t_cmdtab *tab, t_data *data, char **var_exp)
+char **conditions_cd(t_cmdtab *tab, t_data *data, char **var_exp)
 {
-	(void)data;
-	(void)var_exp;
 	if (tab->opt[1] && tab->opt[2])
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
@@ -110,12 +108,13 @@ void	conditions_cd(t_cmdtab *tab, t_data *data, char **var_exp)
 				data->env = export(data->env, var_exp);
 		}
 	}
+	return var_exp;
 }
 
-void	launch_cd(t_cmdtab *tab, t_data *data)
+void launch_cd(t_cmdtab *tab, t_data *data)
 {
-	char	**var_exp;
-	char	*str;
+	char **var_exp;
+	char *str;
 
 	var_exp = NULL;
 	str = getcwd(0, 0);
@@ -132,7 +131,7 @@ void	launch_cd(t_cmdtab *tab, t_data *data)
 			getcwd_error("chdir");
 	}
 	else
-		conditions_cd(tab, data, var_exp);
-	if (str)
-		free(str);
+		var_exp = conditions_cd(tab, data, var_exp);
+	free(str);
+	prep_pwd(var_exp);
 }

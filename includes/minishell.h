@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:55:18 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 22:58:41 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 03:03:17 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void wait_all(t_data *data, t_cmdtab *tab);
 
 int len_tab(char **tab);
 char **export(char **env, char **var_exp);
-char **multi_export(char **env, char *var_exp);
+char **multi_export(char ***env, char *var_exp);
 int arg_err(char c);
 int existing_var(char **env, char *var_exp);
 void print_export(t_cmdtab *tab, char **env);
@@ -172,10 +172,13 @@ int is_numeric(char *str);
 void exit_bin(t_cmdtab *tab, t_data *data);
 void launch_cd(t_cmdtab *tab, t_data *data);
 void getcwd_error(char *error);
+char **conditions_cd(t_cmdtab *tab, t_data *data, char **var_exp);
 
 /*-------------------UTILS------------------*/
 
 char *allocate_str(char *str);
+void prep_pwd(char **env);
+char	**prepare_pwd(char **env);
 int len_tab(char **tab);
 int is_char_num(char c);
 long long int ft_atol(const char *nptr);

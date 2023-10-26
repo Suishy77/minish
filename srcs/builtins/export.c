@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:30:54 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 22:47:27 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 03:13:19 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,32 @@ int	existing_var(char **env, char *var_exp)
 	return (i);
 }
 
-char	**multi_export(char **env, char *var_exp)
+char	**multi_export(char ***env, char *var_exp)
 {
 	int		i;
 	char	**exported;
+	char	*varname;
 
+
+	varname = get_varname(var_exp, 0, ft_strchr(var_exp, '='));
 	i = 0;
-	if (!existing_var(env, var_exp))
-		exported = malloc(sizeof(char *) * (len_tab(env) + 2));
+	if (!existing_var(*env, var_exp))
+		exported = calloc(sizeof(char *), (len_tab(*env) + 2));
 	else
-		exported = malloc(sizeof(char *) * (len_tab(env) + 1));
+		exported = calloc(sizeof(char *), (len_tab(*env) + 1));
 	if (!exported)
 		return (NULL);
-	if (existing_var(env, var_exp) == 1)
-		env = unset(env, get_varname(var_exp, 0, ft_strchr(var_exp, '=')));
-	while (env && env[i])
+	if (existing_var(*env, var_exp) == 1)
+		*env = unset(*env, varname);
+	while (*env && (*env)[i])
 	{
-		exported[i] = ft_strdup(env[i]);
+		exported[i] = ft_strdup((*env)[i]);
 		i++;
 	}
-	if (existing_var(env, var_exp) != 2)
+	if (existing_var(*env, var_exp) != 2)
 		exported[i++] = ft_strdup(var_exp);
-	exported[i] = NULL;
+	*env = ft_free_tab(*env);
+	free(varname);
 	return (exported);
 }
 
@@ -88,23 +92,25 @@ char	**export(char **env, char **var_exp)
 	char	**exported;
 
 	j = 1;
-	exported = malloc(sizeof(char *) * (len_tab(env) + len_tab(var_exp) + 1));
-	if (!exported)
-		return (NULL);
+	exported = NULL;
 	while (env && var_exp && var_exp[j])
 	{
 		if (!error_export(var_exp[j]))
 		{
-			exported = multi_export(env, var_exp[j]);
+			ft_free_tab(exported);
+			exported = multi_export(&env, var_exp[j]);
 			g_status = 0;
+			ft_free_tab(env);
 			env = ft_strdup_tab(exported);
 		}
 		else
 		{
 			error_export_print(var_exp[j]);
+			ft_free_tab(exported);
 			exported = ft_strdup_tab(env);
 		}
 		j++;
 	}
+	ft_free_tab(env);
 	return (exported);
 }

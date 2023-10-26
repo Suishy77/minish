@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:43 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 00:38:13 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 02:28:14 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_data *init_data_struct(t_cmdtab *tab, char ***env)
 	}
 	if (env)
 	{
+		printf("env: %p\n", data->env);
 		data->env = ft_strdup_tab(*env);
 		*env = ft_free_tab(*env);
 	}
@@ -45,24 +46,26 @@ t_data *init_data_struct(t_cmdtab *tab, char ***env)
 
 void close_all_fds(t_cmdtab *tab)
 {
-	t_cmdtab *temp;
+	t_file *tab_in;
+	t_file *tab_out;
 
-	temp = tab;
-	while (temp)
+	tab_in = tab->in;
+	tab_out = tab->out;
+	while (tab)
 	{
-		while (temp->in)
+		while (tab_in)
 		{
-			close(temp->in->fd);
-			if (temp->in->op == HERE_DOC && temp->in->file)
-				unlink(temp->in->file);
-			temp->in = temp->in->next;
+			close(tab_in->fd);
+			if (tab_in->op == HERE_DOC && tab_in->file)
+				unlink(tab_in->file);
+			tab_in = tab_in->next;
 		}
-		while (temp->out && temp->out->fd > 1)
+		while (tab_out && tab_out->fd > 1)
 		{
-			close(temp->out->fd);
-			temp->out = temp->out->next;
+			close(tab_out->fd);
+			tab_out = tab_out->next;
 		}
-		temp = temp->next;
+		tab = tab->next;
 	}
 }
 
@@ -75,6 +78,11 @@ void init_par_data(char **lex, t_cmdtab **tab, t_data **data, char ***env)
 		*data = init_data_struct(*tab, env);
 		add_front(singleton(), *data, DATA);
 	}
+	if (!*data || !*tab || !*lex)
+	{
+		free_all(*tab);
+		return;
+	}
 }
 
 void exec_final(t_cmdtab *tab, t_data *data)
@@ -84,6 +92,7 @@ void exec_final(t_cmdtab *tab, t_data *data)
 	else if (tab->opt && tab->opt[0] && data)
 		exec(tab, data);
 	close_all_fds(tab);
+
 }
 
 void wait_all(t_data *data, t_cmdtab *tab)
@@ -91,6 +100,7 @@ void wait_all(t_data *data, t_cmdtab *tab)
 	int i;
 
 	i = 0;
+
 	while (tab && waitpid(data->pid[i], &g_status, 0) > 0)
 	{
 		if (WTERMSIG(g_status) == 2)

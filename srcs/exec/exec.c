@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 00:04:28 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 02:08:10 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void minishell(t_data *data, t_cmdtab *tab, int i)
 
 void exec(t_cmdtab *tab, t_data *data)
 {
+
 	int i;
 	t_cmdtab *tmp;
 
@@ -80,19 +81,6 @@ void exec(t_cmdtab *tab, t_data *data)
 	wait_all(data, tmp);
 }
 
-void free_all(t_cmdtab *tab)
-{
-	printf("lala2\n");
-	while (tab)
-	{
-		tab->opt = ft_free_tab(tab->opt);
-		printf("lala\n");
-		ft_free_elem((void **)&(tab->cmd));
-		tab = tab->next;
-	}
-	free_gc();
-}
-
 void mini_loop(char ***env)
 {
 	char *prompt;
@@ -107,7 +95,7 @@ void mini_loop(char ***env)
 		signal(SIGQUIT, SIG_IGN);
 		prompt = readline("minishell> ");
 		if (!prompt)
-			break ;
+			break;
 		if (prompt[0])
 			add_history(prompt);
 		lex = lexer(prompt, *env);
@@ -117,9 +105,9 @@ void mini_loop(char ***env)
 			continue;
 		exec_final(tab, data);
 		*env = ft_strdup_tab(data->env);
-		tab->opt = ft_free_tab(tab->opt);
+		free_all(tab);
+
 	}
-	free_all(tab);
 }
 
 int main(int argc, char **argv, char **envp)

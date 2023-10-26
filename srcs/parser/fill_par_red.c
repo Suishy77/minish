@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:30 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:30 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 00:31:34 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_file	*fill_in(int op, char *file)
 {
 	t_file	*in;
 
-	in = collect(sizeof(t_file));
+	in = malloc(sizeof(t_file));
 	if (!in)
 		return (NULL);
 	in->op = op;
@@ -81,7 +81,7 @@ t_file	*fill_out(int op, char *file)
 {
 	t_file	*out;
 
-	out = collect(sizeof(t_file));
+	out = malloc(sizeof(t_file));
 	if (!out)
 		return (NULL);
 	out->op = op;

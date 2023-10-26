@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:14 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 00:43:42 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 01:32:20 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*get_var(char *prompt, char **env, int start, int end)
 	{
 		if (find_varname_env(varname, env[i]))
 		{
+			free(var);
 			var = ft_strdup(&env[i][ft_strlen(varname) + 1]);
 			break ;
 		}

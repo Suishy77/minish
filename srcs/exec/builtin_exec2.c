@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:33 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:52:34 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 01:48:36 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	launch_export(t_cmdtab *tab, t_data *data)
 {
 	if (tab->opt[1])
+	{
 		data->env = export(data->env, tab->opt);
+		printf("data->env: %p\n", data->env);
+	}
 	else
 		print_export(tab, data->env);
 }
