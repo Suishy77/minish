@@ -61,7 +61,7 @@ $(NAME): $(OBJS)
 	@make -C libft
 	@mv libft/libft.a .
 	$(CC) $(CFLAGS) $(OBJS) libft.a -o $(NAME) -lreadline
-	@echo "\033[32mMinishell Compiled!\n"
+	@echo "\033[32mMinishell Compiled!\n\033[0m"
 
 $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c | $(DIR_OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(HEAD)
@@ -93,6 +93,8 @@ party:
 	@sleep 0.5
 	@printf "\033c"
 	@echo "\033[34m♪┗(・o･)┓♪\n"
+leaks:		all
+			@valgrind --suppressions=rl_supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME)
 
 
 .PHONY: all clean fclean re party

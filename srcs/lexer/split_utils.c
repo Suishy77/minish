@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:53 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 23:26:12 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:54:37 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int *pipe_strlen(char *str, t_tks *tks)
 	j = 0;
 	k = 0;
 	count = 0;
-	lens = collect(sizeof(int) * (count_pipes(str, tks)));
+	lens = collect(sizeof(int) * (count_pipes(str, tks)), NBR);
 	if (!lens)
 		return (0);
 	while (str && str[i])
@@ -120,7 +120,7 @@ char *fill_wrd(char *s, int *i)
 
 	j = 0;
 	k = *i;
-	ret = collect(sizeof(char) * (wdlen(s, k) + 1));
+	ret = collect(sizeof(char) * (wdlen(s, k) + 1), CHAR_PTR);
 	if (!ret)
 		return (NULL);
 	while (s[k] && s[k] != ' ' && s[k] != '\t')

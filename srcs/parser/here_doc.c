@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:34 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 00:26:39 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 00:24:07 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	here_doc(char *split, int fd)
 			close(fd);
 			break ;
 		}
-		ft_putstr_fd(prompt, fd);
-		ft_putstr_fd("\n", fd);
+		ft_putendl_fd(prompt, fd);
 		free(prompt);
 		line++;
 	}

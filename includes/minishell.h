@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:55:18 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 03:03:17 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 00:19:04 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ int consecutive_redir(char *prompt, t_tks *tks);
 /*-------------------FREE---------------------*/
 
 t_garbage **singleton(void);
-void *collect(size_t size);
+void *collect(size_t size, enum PTR_TYPE type);
 void free_gc(void);
 void add_front(t_garbage **lst, void *ptr, enum PTR_TYPE type);
 char **ft_tabdup_env(char **tab);

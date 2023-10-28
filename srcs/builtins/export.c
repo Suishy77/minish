@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:30:54 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 03:13:19 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:51:13 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ char	**multi_export(char ***env, char *var_exp)
 	varname = get_varname(var_exp, 0, ft_strchr(var_exp, '='));
 	i = 0;
 	if (!existing_var(*env, var_exp))
-		exported = calloc(sizeof(char *), (len_tab(*env) + 2));
+		exported = ft_calloc(sizeof(char *), (len_tab(*env) + 2));
 	else
-		exported = calloc(sizeof(char *), (len_tab(*env) + 1));
+		exported = ft_calloc(sizeof(char *), (len_tab(*env) + 1));
 	if (!exported)
 		return (NULL);
 	if (existing_var(*env, var_exp) == 1)

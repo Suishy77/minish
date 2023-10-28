@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 02:08:10 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 19:08:39 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void minishell(t_data *data, t_cmdtab *tab, int i)
 	}
 }
 
-void exec(t_cmdtab *tab, t_data *data)
+void	exec(t_cmdtab *tab, t_data *data)
 {
 
 	int i;
@@ -81,12 +81,12 @@ void exec(t_cmdtab *tab, t_data *data)
 	wait_all(data, tmp);
 }
 
-void mini_loop(char ***env)
+void	mini_loop(char ***env)
 {
-	char *prompt;
-	char **lex;
-	t_data *data;
-	t_cmdtab *tab;
+	char		*prompt;
+	char		**lex;
+	t_data		*data;
+	t_cmdtab	*tab;
 
 	tab = NULL;
 	while (1)
@@ -95,7 +95,7 @@ void mini_loop(char ***env)
 		signal(SIGQUIT, SIG_IGN);
 		prompt = readline("minishell> ");
 		if (!prompt)
-			break;
+			break ;
 		if (prompt[0])
 			add_history(prompt);
 		lex = lexer(prompt, *env);
@@ -106,19 +106,15 @@ void mini_loop(char ***env)
 		exec_final(tab, data);
 		*env = ft_strdup_tab(data->env);
 		free_all(tab);
-
 	}
 }
 
 int main(int argc, char **argv, char **envp)
 {
-	char **env;
+	char	**env;
 
-	if (!isatty(STDIN_FILENO))
-	{
-		ft_putstr_fd("OOPS! Error !\n", 2);
-		exit(2);
-	}
+	/* if (!isatty(STDIN_FILENO))
+		return (ft_putstr_fd("OOPS! Error !\n", 2), 2); */
 	env = ft_strdup_tab(envp);
 	(void)argc;
 	(void)argv;

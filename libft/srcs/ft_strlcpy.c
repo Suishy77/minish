@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:14:07 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/09 13:53:54 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:14 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	return (ft_strlen(src));
 }
-/*
-int main(void)
-{
-	char str[32];
-	char s2[] = "333333";
-
-	ft_strlcpy(str, s2, 10);
-	printf("%s", str);
-	return (0);
-}
- */

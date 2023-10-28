@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:14 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:14 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:58:56 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**split_2_ouf(char *str, t_tks *tks)
 	len = pipe_strlen(str, tks);
 	if (!len)
 		return (NULL);
-	sdf = collect(sizeof(char *) * (count_pipes(str, tks) + 1));
+	sdf = collect(sizeof(char *) * (count_pipes(str, tks) + 1), CHAR_PTR);
 	if (!sdf)
 		return (NULL);
 	while (++i < count_pipes(str, tks) && len && len[i])
@@ -83,7 +83,6 @@ int	split_loop(char *str, char **spl, int count)
 				return (0);
 		}
 	}
-	spl[i] = 0;
 	return (1);
 }
 
@@ -95,7 +94,7 @@ char	**split(char *str)
 	spl = NULL;
 	count = 0;
 	cwords(str, &count);
-	spl = collect(sizeof(char *) * (count + 1));
+	spl = ft_calloc(sizeof(char *), (count + 1));
 	if (!spl)
 		return (NULL);
 	if (!split_loop(str, spl, count))

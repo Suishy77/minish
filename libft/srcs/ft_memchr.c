@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:55:51 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/18 19:07:25 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:45 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-// #include <stdlib.h>
-// #include <stdio.h>
-// #include <string.h>
-
-// int main(void)
-// {
-// 	char	buffer[80];
-// 	char	*str;
-
-// 	strcpy(buffer, "hello");
-
-// 	str = (char *)ft_memchr(buffer, 'z', 25);
-// 	if (str == NULL)
-// 		printf("not found\n");
-// 	else
-// 		printf("%s\n", str);
-// 	return (0);
-// }

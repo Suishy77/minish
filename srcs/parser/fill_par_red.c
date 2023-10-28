@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:30 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 00:31:34 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:28:17 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	fds_ok(t_cmdtab *tab)
 	return (1);
 }
 
-void	init_files(t_cmdtab *tab, char **spl)
+void	init_files(t_cmdtab *tab, char **spl) ///// le fill out....
 {
 	int	i;
+	//t_file	*tmp;
 
 	i = 0;
 	while (spl && spl[i])

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:58:45 by aminko            #+#    #+#             */
-/*   Updated: 2023/05/13 15:20:46 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:56 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,3 @@ int	ft_printf(const char *fmt, ...)
 	va_end(args);
 	return (count);
 }
-/*
-#include <limits.h>
-int main(void)
-{
-
-	printf(" %p %p %x\n", (void *)LONG_MIN, (void *)LONG_MAX, 15);
-	ft_printf(" %p %p %x\n", (void *)LONG_MIN, (void *)LONG_MAX, 15);
-
-	//printf("%d\n", printf("%p", &pxX));
-	//ft_printf("%d\n", ft_printf("%p", &pxX));
-}
-// 16, long_min, int_min, 0
-
- */

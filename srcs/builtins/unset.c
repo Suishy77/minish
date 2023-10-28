@@ -6,15 +6,15 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:30:49 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 02:31:28 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/26 03:29:29 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **init_unseted(char **env, char *varname)
+char	**init_unseted(char **env, char *varname)
 {
-	char **unseted;
+	char	**unseted;
 
 	if (existing_var(env, varname) && varname[ft_strlen(varname) - 1] != '=')
 		unseted = malloc(sizeof(char *) * (len_tab(env)));
@@ -26,11 +26,11 @@ char **init_unseted(char **env, char *varname)
 	return (unseted);
 }
 
-char **unset(char **env, char *varname)
+char	**unset(char **env, char *varname)
 {
-	int i;
-	int j;
-	char **unseted;
+	int		i;
+	int		j;
+	char	**unseted;
 
 	i = 0;
 	j = 0;

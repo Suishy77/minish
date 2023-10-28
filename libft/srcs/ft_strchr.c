@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:55:17 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 20:24:39 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:03 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,3 @@ int	ft_strchr(const char *s, int c)
 	}
 	return (0);
 }
-
-
-/*
-int main(void)
-{
-    char buffer[80];
-    char *str;
-
-    strcpy(buffer, "hello");
-    str = ft_strchr(buffer, 'l');
-    if (str == NULL)
-        printf("not found\n");
-    else
-        printf("found: %s\n", str);
-    return (0);
-}
- */

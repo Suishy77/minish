@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:39 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 00:29:35 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 00:15:48 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ t_cmdtab	*lstnew_cmd(char **spl, int index)
 {
 	t_cmdtab	*tab;
 
-	tab = collect(sizeof(t_cmdtab));
+	tab = collect(sizeof(t_cmdtab), NBR);
 	if (!tab)
 		return (NULL);
-	tab->opt = NULL;
 	tab->opt = get_opt(spl);
 	tab->cmd = NULL;
 	tab->in = NULL;
@@ -45,7 +44,8 @@ void	lst_addback_cmd(t_cmdtab **tab, t_cmdtab *new)
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new;
-	new->prev = temp;
+	new->prev = temp; // sert a rien
+	// free new
 }
 
 void	lst_addback_red(t_file **red, t_file *new)
@@ -63,6 +63,7 @@ void	lst_addback_red(t_file **red, t_file *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	ft_free_elem((void **)&new->file);
 }
 
 int	lstsize(t_cmdtab *lst)

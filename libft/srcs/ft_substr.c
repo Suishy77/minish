@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:58:02 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 20:44:04 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:31 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ a pour taille maximale ’len’. */
 
 char	*ft_substr(const char *s, int start, int len)
 {
-	int	i;
-	int	len_s;
+	int		i;
+	int		len_s;
 	char	*str;
 
 	if (!s)
@@ -44,11 +44,3 @@ char	*ft_substr(const char *s, int start, int len)
 	str[i] = '\0';
 	return (str);
 }
-
-/* int main(void)
-{
-	char str[] = "hello";
-	printf("%s", ft_substr(str, 3, 7));
-	return(0);
-}
- */

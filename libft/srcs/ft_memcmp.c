@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:55:59 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/19 14:01:12 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:48 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-
-/* int main(void)
-{
-	char s1[] = "bonjo";
-	char s2[32] = "bonj";
-	printf("%d", ft_memcmp(s1, s2, 5));
-	return (0);
-}
- */

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:52:08 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/19 14:19:54 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:11 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dlen + i] = '\0';
 	return (slen + dlen);
 }
-
-// #include <stdlib.h>
-// #include <stdio.h>
-// #include <unistd.h>
-// #include <bsd/string.h>
-
-// int		main(void)
-// {
-//  	char	dest[15]  = "rrrrrrrrrrrrrrr";
-
-// 	// if (!(dest = (char *)malloc(sizeof(*dest) * 15)))
-// 		// return (0);
-// 	// memset(dest, 0, 15);
-// 	// memset(dest, 'r', 6);
-// 	// memset(dest, 'r', 15);
-// 	char *src = "lorem ipsum dolor sit amet";
-// 	printf("%ld", strlcat(dest, src, 5));
-// 	printf("\n%s", dest);
-// 	printf("\n%s", src);
-// 	// write(1, "\n", 1);
-// 	// write(1, dest, 15);
-
-// 	return (0);
-// }

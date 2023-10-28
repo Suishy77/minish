@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:31:34 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/17 18:19:53 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:21 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,3 @@ int	ft_isalpha(int c)
 {
 	return ((c >= 97 && c <= 122) || (c >= 65 && c <= 90));
 }
-
-/* int main (void)
-{
-	char c = '1';
-	if (ft_isalpha(c))
-		printf("yes");
-	return (0);
-}
- */

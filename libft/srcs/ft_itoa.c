@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:56:31 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/18 15:43:22 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:31 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,3 @@ char	*ft_itoa(int n)
 	}
 	return (str);
 }
-// #include <stdio.h>
-// int main(void)
-// {
-// 	printf("%s", ft_itoa(0));
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:36:18 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/18 18:39:31 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:08 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,3 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_bzero(dst, count * size);
 	return (dst);
 }
-
-/* int main(void)
-{
-	printf("%p", ft_calloc(SIZE_MAX, SIZE_MAX));
-	return (0);
-}
- */

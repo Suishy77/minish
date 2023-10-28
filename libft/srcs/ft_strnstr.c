@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:56:12 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/18 14:29:09 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:19 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
-
-/* int main(void)
-{
-	char s1[] = "hello";
-	char s2[] = "ll";
-	printf("%s", ft_strnstr(s1, s2, 10));
-	return (0);
-}
- */

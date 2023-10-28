@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:52:43 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 02:28:14 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 00:19:30 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,25 @@ t_data *init_data_struct(t_cmdtab *tab, char ***env)
 	int i;
 
 	i = 0;
-	data = calloc(sizeof(t_data), 1);
+	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (NULL);
 	data->p_count = lstsize(tab);
-	data->pid = collect(sizeof(int) * data->p_count);
+	data->pid = collect(sizeof(int) * data->p_count, NBR);
 	if (!data->pid)
 		return (NULL);
-	data->fd = collect(sizeof(int *) * data->p_count);
+	data->fd = collect(sizeof(int *) * data->p_count, NBR);
 	if (!data->fd)
 		return (NULL);
 	while (i < data->p_count)
 	{
-		data->fd[i] = collect(sizeof(int) * 2);
+		data->fd[i] = collect(sizeof(int) * 2, NBR);
 		if (!data->fd[i])
 			return (NULL);
 		i++;
 	}
 	if (env)
 	{
-		printf("env: %p\n", data->env);
 		data->env = ft_strdup_tab(*env);
 		*env = ft_free_tab(*env);
 	}

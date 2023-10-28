@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:31:12 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/19 13:38:39 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:04 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,3 @@ int	ft_atoi(const char *str)
 	}
 	return (sum * sign);
 }
-/*
-#include <stdio.h>
- int main(void)
-{
-	char str[] = "--123ab12";
-	printf("%d", ft_atoi(str));
-	return (0);
-}
- */

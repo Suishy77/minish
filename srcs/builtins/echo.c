@@ -6,13 +6,13 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:31:12 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 00:07:00 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 23:55:38 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	find_n(char **cmd)
+/* int	find_n(char **cmd)
 {
 	int	i;
 	int	j;
@@ -35,7 +35,7 @@ int	find_n(char **cmd)
 		i++;
 	}
 	return (i + 1);
-}
+} */
 
 int	ft_echo(char *str, int fd)
 {
@@ -68,25 +68,31 @@ void	echo(char **cmd, int fd)
 	int	flag;
 
 	g_status = 0;
-	flag = find_n(cmd + 1);
-	i = flag;
+	flag = 0;
+	i = 0;
+	// cmd [2] = NULL;
+	/* for (int i = 0; cmd[i]; i++)
+	{
+		printf("cmd[%d] = {{%s}}\n", i, cmd[i]);
+	} */
+	while (cmd[++i] && !ft_strncmp(cmd[i], "-n", 2))
+		flag = 1;
 	while (cmd && cmd[i])
 	{
-		if (i > flag)
-			ft_putstr_fd(" ", fd);
 		if (is_quoted(cmd[i]))
 		{
 			ft_putstr_fd(cmd[i], fd);
-			cmd[i][ft_strlen(cmd[i]) - 1] = '\0';
+			cmd[i][ft_strlen(cmd[i]) - 1] = '\0'; // ?
 		}
 		else
 		{
 			ft_putstr_fd(cmd[i], fd);
 		}
-		i++;
+		if (cmd[++i])
+			ft_putstr_fd(" ", fd);
 	}
-	if (flag == 1)
-		write(fd, "\n", 1);
+	if (!flag)
+		ft_putstr_fd("\n", fd);
 	if (fd > 1)
 		close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:43 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 00:41:52 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:20:53 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ int	detect_hd(char **lexer, t_cmdtab *tab)
 	tmp = tab;
 	while (lexer && lexer[i] && tmp)
 	{
-		spl = NULL;
 		spl = split(lexer[i]);
 		if (!detect_hd_loop(spl, tmp, &count))
+		{
+			ft_free_elem((void **)&spl);
 			return (0);
+		}
+		ft_free_elem((void **)&spl);
 		i++;
 		tmp = tmp->next;
 	}
@@ -59,10 +62,10 @@ void	fill_files(t_cmdtab **tab, char **lexer)
 	{
 		while (lexer && lexer[i] && temp)
 		{
-			spl = NULL;
 			spl = split(lexer[i]);
 			if (g_status != 130)
 				init_files(temp, spl);
+			ft_free_elem((void **)&spl);
 			i++;
 			temp = temp->next;
 		}
@@ -83,18 +86,21 @@ t_cmdtab	*parser(char **lexer)
 	int			i;
 	char		**spl;
 	t_cmdtab	*tab;
+	t_cmdtab	*tmp;
 
 	i = 0;
 	tab = NULL;
+	tmp = NULL;
 	spl = NULL;
 	g_status = 0;
 	while (lexer && lexer[i])
 	{
-		spl = NULL;
 		spl = split(lexer[i]);
 		if (!syntax_err_redir(spl))
-			return (NULL);
-		lst_addback_cmd(&tab, lstnew_cmd(spl, i));
+			return (ft_free_elem((void **)&spl), NULL);
+		tmp = lstnew_cmd(spl, i);
+		lst_addback_cmd(&tab, tmp);
+		ft_free_elem((void **)&spl);
 		i++;
 	}
 	if (lexer && tab)

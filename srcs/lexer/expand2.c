@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:14 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 01:32:20 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 02:00:42 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ char	*expand_err_code(char *prompt, int start, int end)
 	str_status = ft_itoa(g_status);
 	len = ft_strlen(str_status);
 	start++;
-	expanded = collect(sizeof(char) * (len + (end - start) + 1));
+	expanded = malloc(sizeof(char) * (len + (end - start) + 1));
 	if (!expanded)
 		return (NULL);
 	while (str_status && str_status[j])
 		expanded[i++] = str_status[j++];
 	while (prompt && prompt[start] && start < end)
 		expanded[i++] = prompt[start++];
+	free(str_status);
 	expanded[i] = '\0';
 	return (expanded);
 }

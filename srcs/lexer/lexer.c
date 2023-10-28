@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:48 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:53:49 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:42:16 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,19 @@ char	**lexer(char *prompt, char **env)
 	if (syntax_error(prompt, tks) == 1)
 	{
 		g_status = 2;
+		free(expanded);
 		ft_putstr_fd("minishell: syntax error near unexpected token\n", 2);
 		return (NULL);
 	}
 	if (syntax_error(prompt, tks) == 2)
 	{
 		g_status = 127;
+		free(expanded);
 		ft_putstr_fd("minishell: Command not found\n", 2);
 		return (NULL);
 	}
-	cdo = final_treat(prompt_2_ouf(clean_2_ouf(expanded, tks), tks), tks);
+	cdo = final_treat(prompt_2_ouf(clean_2_ouf(expanded, tks), tks), tks); // esta merda?
+	free(expanded);
 	sdf = split_2_ouf(cdo, tks);
 	return (sdf);
 }

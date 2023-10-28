@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:43:48 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/19 14:04:44 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:51 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
-
-/*
-int main(void)
-{
-	char buffer[32] = "World";
-	ft_memmove(buffer, buffer + 1, 5);
-	printf("%s\n", buffer);
-
-	return (0);
-}
- */

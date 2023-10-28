@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:08 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 00:44:07 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:36:35 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_expand *init_expand(char **env)
 {
 	t_expand *exp;
 
-	exp = collect(sizeof(t_expand));
+	exp = collect(sizeof(t_expand), NBR);
 	if (!exp)
 		return (NULL);
 	exp->env = env;
@@ -76,8 +76,10 @@ char *expand(char *pro, char **env, t_tks *tks)
 	char *expanded;
 	t_expand *id;
 
+	if (!strcmp(pro, "$"))
+		return (ft_strdup(pro));
 	id = init_expand(env);
-	expanded = collect(sizeof(char) * (len_expand(pro, tks, env) * 2 + 1));
+	expanded = malloc(sizeof(char) * (len_expand(pro, tks, env) * 2 + 1));
 	if (!expanded)
 		return (NULL);
 	while (pro && pro[id->i])

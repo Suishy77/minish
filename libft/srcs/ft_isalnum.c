@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:31:03 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/09 13:51:18 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:13 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,3 @@ int	ft_isalnum(int c)
 {
 	return (ft_isdigit(c) || ft_isalpha(c));
 }
-
-/* int main (void)
-{
-	char c = ':';
-	if (ft_isalnum(c))
-		printf("yes");
-	return (0);
-}
- */

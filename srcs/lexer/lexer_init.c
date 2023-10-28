@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:53:41 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/24 22:49:09 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:50:14 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ t_tks	*init_tokens(char *str)
 {
 	t_tks	*tks;
 
-	tks = collect(sizeof(t_tks));
+	tks = collect(sizeof(t_tks), NBR);
 	if (!tks)
 		return (NULL);
-	tks->q = collect(sizeof(int) * (count_elem(str, '\'')));
-	tks->dq = collect(sizeof(int) * (count_elem(str, '"')));
-	tks->q_on = collect(sizeof(int) * (count_elem(str, '\'')));
-	tks->dq_on = collect(sizeof(int) * (count_elem(str, '"')));
-	tks->p = collect(sizeof(int) * (count_elem(str, '|')));
-	tks->in = collect(sizeof(int) * count_elem(str, '<'));
-	tks->out = collect(sizeof(int) * count_elem(str, '>'));
-	tks->ap = collect(sizeof(int) * count_d_elem(str, ">>"));
-	tks->d_in = collect(sizeof(int) * count_d_elem(str, "<<"));
-	tks->dol = collect(sizeof(int) * count_elem(str, '$'));
-	tks->qst = collect(sizeof(int) * count_elem(str, '?'));
+	tks->q = collect(sizeof(int) * (count_elem(str, '\'')), NBR);
+	tks->dq = collect(sizeof(int) * (count_elem(str, '"')), NBR);
+	tks->q_on = collect(sizeof(int) * (count_elem(str, '\'')), NBR);
+	tks->dq_on = collect(sizeof(int) * (count_elem(str, '"')), NBR);
+	tks->p = collect(sizeof(int) * (count_elem(str, '|')), NBR);
+	tks->in = collect(sizeof(int) * count_elem(str, '<'), NBR);
+	tks->out = collect(sizeof(int) * count_elem(str, '>'), NBR);
+	tks->ap = collect(sizeof(int) * count_d_elem(str, ">>"), NBR);
+	tks->d_in = collect(sizeof(int) * count_d_elem(str, "<<"), NBR);
+	tks->dol = collect(sizeof(int) * count_elem(str, '$'), NBR);
+	tks->qst = collect(sizeof(int) * count_elem(str, '?'), NBR);
 	tks->prompt = ft_strdup(str);
 	add_front(singleton(), tks->prompt, CHAR_PTR);
 	return (tks);

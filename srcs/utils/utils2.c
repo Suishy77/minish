@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:49:45 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/26 01:41:06 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:01:09 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_strjoin_hd(char *s1, char *s2)
 	if (!s1)
 		return (ft_strdup(s2));
 	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = (char *)collect(sizeof(char) * (len + 1));
+	dest = (char *)malloc(sizeof(char) * (len + 1)); // ici
 	if (!dest)
 		return (NULL);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:57:14 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/07 20:44:58 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:52:59 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,3 @@ char	**ft_split(char const *s, char c)
 	tab[i] = 0;
 	return (tab);
 }
-
-/* #include <stdlib.h>
-#include <stdio.h>
-
-
-int main(void)
-{
-	char	**tab;
-	int	 i;
-
-	tab = ft_split("  abcdefghijk	", 'h');
-	i = 0;
-	while (tab[i])
-	{
-		printf("tab[%d] = %s\n", i, tab [i]);
-		i++;
-	}
-	return 0;
-} */

@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:54:59 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/09 13:54:56 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:42 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,3 @@ int	ft_toupper(int c)
 		c -= 32;
 	return (c);
 }
-
-/* int main(void)
-{
-	int c = 'c';
-	printf("%c", ft_toupper(c));
-	return (0);
-}
- */

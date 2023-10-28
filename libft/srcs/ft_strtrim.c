@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:57:57 by aminko            #+#    #+#             */
-/*   Updated: 2022/11/19 14:26:39 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:28 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,3 @@ char	*ft_strtrim(char const *s, char const *set)
 		return (NULL);
 	return (str);
 }
-
-/* #include <unistd.h>
-#include <stdlib.h>
-
-int main(void)
-{
-	char	*strtrim;
-	char s1[] = "lorem ipsum dolor sit amet";
-	if (!(strtrim = ft_strtrim(s1, "loamet")))
-		printf("NULL");
-	else
-		printf("%s", strtrim);
-	if (strtrim == s1)
-		printf("\nA new string was not returned");
-	return (0);
-}
- */

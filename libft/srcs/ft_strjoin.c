@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:57:37 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/07 20:36:12 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:53:06 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = '\0';
 	return (str);
 }
-
-/* int main(void)
-{
-	char s1[5] = "hola";
-	char s2[15] = " como esta";
-	printf("%s", ft_strjoin(s1, s2));
-	return (0);
-}
- */

@@ -6,7 +6,7 @@
 #    By: aminko <aminko@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 23:14:10 by aminko            #+#    #+#              #
-#    Updated: 2023/10/21 19:49:29 by aminko           ###   ########.fr        #
+#    Updated: 2023/10/26 19:58:05 by aminko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,5 +95,7 @@ fclean:		clean
 			@rm -rf $(NAME)
 
 re:			fclean all
+
+
 
 .PHONY:		all clean fclean re

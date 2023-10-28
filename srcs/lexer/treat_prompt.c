@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:10 by aminko            #+#    #+#             */
-/*   Updated: 2023/07/15 20:54:10 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:54:58 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*fill_2_ouf(char *str, int len, int *k)
 	int		j;
 	char	*ret;
 
-	ret = collect(sizeof(char) * (len + 1));
+	ret = collect(sizeof(char) * (len + 1), CHAR_PTR);
 	if (!ret)
 		return (NULL);
 	j = 0;
@@ -62,7 +62,7 @@ char	*clean_2_ouf(char *prompt, t_tks *tks)
 
 	i = 0;
 	j = 0;
-	clean = collect(sizeof(char) * (compute_new_len(prompt, tks) + 1));
+	clean = collect(sizeof(char) * (compute_new_len(prompt, tks) + 1), CHAR_PTR);
 	if (!clean)
 		return (NULL);
 	while (prompt[i])

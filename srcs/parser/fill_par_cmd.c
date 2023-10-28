@@ -6,7 +6,7 @@
 /*   By: aminko <aminko@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:54:26 by aminko            #+#    #+#             */
-/*   Updated: 2023/10/25 21:50:31 by aminko           ###   ########.fr       */
+/*   Updated: 2023/10/28 00:57:08 by aminko           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	**get_paths(char **env)
 	char	**env_path;
 	char	*tmp;
 
-	i = 0;
+	i = -1;
 	env_path = NULL;
-	while (env && env[i])
+	while (env && env[++i])
 	{
 		path_var = ft_strnstr(env[i], "PATH=", 6);
 		if (path_var)
@@ -29,10 +29,10 @@ char	**get_paths(char **env)
 			env_path = ft_split(path_var + 5, ':');
 			break ;
 		}
-		i++;
 	}
 	i = -1;
-	while (env_path && env_path[++i] && env_path[i][ft_strlen(env_path[i]) - 1] != '/')
+	while (env_path && env_path[++i]
+		&& env_path[i][ft_strlen(env_path[i]) - 1] != '/')
 	{
 		tmp = env_path[i];
 		env_path[i] = ft_strjoin(env_path[i], "/");
@@ -69,8 +69,7 @@ char	**get_opt(char **split)
 
 	i = 0;
 	j = 0;
-	opt = NULL;
-	opt = calloc(sizeof(char *), (len_cmd(split) + 1));
+	opt = ft_calloc(sizeof(char *), (len_cmd(split) + 100));
 	if (!opt)
 		return (NULL);
 	while (split && split[i] && opt)
@@ -78,13 +77,8 @@ char	**get_opt(char **split)
 		if (is_redir(split[i]))
 			i += 2;
 		else if (split[i])
-		{
-			opt[j] = ft_strdup(split[i]);
-			j++;
-			i++;
-		}
+			opt[j++] = ft_strdup(split[i++]);
 	}
-	opt[j] = NULL;
 	return (opt);
 }
 
@@ -120,7 +114,10 @@ char	*get_abs_path(char **paths, char **opt)
 		tmp = ft_strdup(paths[i]);
 		abs = ft_strjoin(tmp, opt[0]);
 		if (access(abs, F_OK | X_OK) == 0)
+		{
+			ft_free_elem((void **)&tmp);
 			break ;
+		}
 		ft_free_elem((void **)&tmp);
 		ft_free_elem((void **)&abs);
 		i++;
